@@ -41,7 +41,7 @@ const TodoList =  ({todos} : {todos : Todo[]} ) => {
 
   return (
     <div className='max-h-[360px] overflow-auto mb-4 px-4'>
-      {data.length > 0 ? (
+      {data && data.length > 0 ? (
         data.map((item) => (
           <div
             key={item.id}

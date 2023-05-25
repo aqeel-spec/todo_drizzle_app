@@ -11,7 +11,7 @@ export async function GET(request : Request , context : any) {
         throw new Error("Invalid Get mettod");
     }
     console.log()
-    return NextResponse.json({ deletedId : id , deletedData : res })
+    return NextResponse.json({ Welcome : "Welcome in Todo Appp", Your_Data : res})
 }
 
 export async function DELETE( request: NextRequest , context : any) {

@@ -4,13 +4,14 @@ import { Todo , NewTodo , db , todoTable } from "@/lib/drizzle";
 import { InferModel, eq, sql } from "drizzle-orm";
 
 
-export async function GET (request : NextRequest) {
+export async function GET (request : NextRequest , response: NextResponse) {
 
     try {
       await sql`CREATE TABLE IF NOT EXISTS Todos(id serial, Task varhar(255))`;
 
       const res = await db.select().from(todoTable);
-      console.log(res)
+      console.log(res);
+    
       return NextResponse.json(res)
 
     } catch (error) {

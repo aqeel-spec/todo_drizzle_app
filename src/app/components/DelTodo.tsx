@@ -15,7 +15,7 @@ const DelTodo = ({ todo }: { todo: Todo }) => {
     const deleteUser = async () => {
       if (data) {
         try {
-          const res = await fetch(`http://localhost:3000/api/todo/${data.id}`, {
+          const res = await fetch(`/api/todo/${data.id}`, {
             method: "DELETE",
           });
 
