@@ -2,6 +2,7 @@
 import AddTodo from '@/app/components/AddTodo';
 import TodoList from '@/app/components/TodoList';
 import { Todo } from '@/lib/drizzle';
+import { ToastContainer } from 'react-toastify';
 
 // const getData = async () => {
 //   try {
@@ -34,6 +35,7 @@ export default async function Home() {
 
   return (
     <main className=" bg-gradient-to-tr from-primary to-secondry flex min-h-screen  items-center justify-center ">
+      
       <div className="px-6 py-8 rounded-xl bg-gradient-to-br from-[#D9D9D9]/50 to-[#D9D9D9]/60  backdrop-blur-xl w-full max-w-md">
         {/** @ts-ignore */}
         <TodoList todos={data} />
