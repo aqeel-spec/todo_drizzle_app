@@ -1,7 +1,6 @@
 
 import AddTodo from '@/app/components/AddTodo';
 import TodoList from '@/app/components/TodoList';
-import { ToastContainer } from 'react-toastify';
 
 
 export default async function Home() {
