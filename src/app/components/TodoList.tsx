@@ -1,28 +1,14 @@
 "use client"
 import { Todo } from '@/lib/drizzle';
 import React, { useEffect, useState } from 'react';
-import DelTodo from './DelTodo';
 import { useRouter } from 'next/navigation';
 import AddTodo from './AddTodo';
 import UpdateTodo from './UpdateTodo';
-const getData = async () => {
-  try {
-      const res = await fetch("http://localhost:3000/api/todo", {
-          method: "GET",
-          cache:"no-store",
-          headers: {
-              "Content-Type": "application/json"
-          }
-      });
-      if (!res.ok) {
-          throw new Error("Failed to fetch the data")
-      };
-      const result = await res.json()
-      return result
-  } catch (err) {
-      console.log(err)
-  }
-}
+import { ToastContainer, toast } from 'react-toastify';
+import { MdOutlineDeleteForever } from "react-icons/md";
+
+
+
 
 const TodoList =  ({todos} : {todos : Todo[]} ) => {
   const { refresh } = useRouter();
@@ -38,6 +24,30 @@ const TodoList =  ({todos} : {todos : Todo[]} ) => {
     setUpdateTodo(item);
     refresh();
   }
+ 
+  const deleteTodo = async (id : any) => {
+    try {
+      const res = await fetch(`/api/todo/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to delete data");
+      } else {
+        console.log("Data successfully deleted from the database");
+        toast.success("Todo deleted successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+          className: "text-red-500",
+        });
+      }
+  
+      const result = await res.json();
+      console.log("Result:", result);
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error("Failed to delete todo");
+    } 
+  };
 
   return (
     <div className='max-h-[360px] overflow-auto mb-4 px-4'>
@@ -64,7 +74,13 @@ const TodoList =  ({todos} : {todos : Todo[]} ) => {
             {/* delete todo is here */}
             <div className=' relative border-l-2 border-primary  ml-auto right-0 bg-red-200 ' onClick={() => handleTodoClick(item)}>
               {/** @ts-ignore */}
-              <DelTodo todo={item === selectedTodo ? item : undefined} />
+              {
+                data.length > 3 && (
+                  <button className="group"  onClick={() => deleteTodo (item.id)}>
+                    <MdOutlineDeleteForever className='h-7 w-7 hover:text-red-500' />
+                  </button>
+                )
+              }
             </div>
            </div>
             
@@ -74,7 +90,7 @@ const TodoList =  ({todos} : {todos : Todo[]} ) => {
       ) : (
         <p>Loading...</p>
       )}
-     
+     <ToastContainer  />
     </div>
   );
 };

@@ -54,10 +54,10 @@ const AddTodo = () => {
 
   return (
     <>
-     <ToastContainer className="right-5 left-5 ml-auto absolute" />
-      <div className="w-full flex space-x-3 px-4">
+     
+      <div className="space-x-3  flex absolute bottom-10 left-0 w-full  px-6 lg:px-12  ">
         <input
-          className="rounded-full w-full py-3.5 px-5 border focus:outline-secondry"
+          className="rounded-full focus:ring-2  ring-primary duration-300 py-2.5 px-6 bg-white focus:outline-none w-full flex-1 shrink"
           name="task"
           placeholder="Enter your task ..."
           value={todo}
@@ -66,7 +66,9 @@ const AddTodo = () => {
 
         <button
           type="button"
-          className="shrink-0 bg-gradient-to-b from-primary to-secondry  rounded-full p-4"
+          className="bg-gradient-to-tr from-primary to-secondary h-12 w-12 p-1 flex-none  
+          rounded-full flex justify-center items-center hover:scale-105 duration-300
+           disabled:hover:scale-100 disabled:cursor-not-allowed "
           onClick={onClickAdd}
           disabled={loading}
         >
@@ -83,6 +85,7 @@ const AddTodo = () => {
           )}
         </button>
       </div>
+      
     </>
   );
 };
